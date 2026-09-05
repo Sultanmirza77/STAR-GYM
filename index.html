@@ -1,0 +1,2319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+  >
+
+  <!-- =====================================================
+       PWA SETTINGS
+  ====================================================== -->
+
+  <meta
+    name="theme-color"
+    content="#050505"
+  >
+
+  <meta
+    name="description"
+    content="STAR GYM - Premium Gym Management App"
+  >
+
+  <meta
+    name="mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black"
+  >
+
+  <meta
+    name="apple-mobile-web-app-title"
+    content="STAR GYM"
+  >
+
+
+  <!-- =====================================================
+       PWA MANIFEST
+  ====================================================== -->
+
+  <link
+    rel="manifest"
+    href="./manifest.json"
+  >
+
+
+  <!-- =====================================================
+       APP ICONS
+  ====================================================== -->
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="192x192"
+    href="./assets/icon-192.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    sizes="192x192"
+    href="./assets/icon-192.png"
+  >
+
+
+  <title>
+    STAR GYM
+  </title>
+
+
+  <!-- =====================================================
+       MAIN CSS
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="./style.css"
+  >
+
+
+  <!-- =====================================================
+       PROFILE PHOTO CSS
+  ====================================================== -->
+
+  <style>
+
+    /* =====================================================
+       STUDENT PROFILE PHOTO PICKER
+    ====================================================== */
+
+    .student-photo-picker {
+      margin-top: 8px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--card);
+      text-align: center;
+    }
+
+
+    .student-photo-preview-wrap {
+      width: 105px;
+      height: 105px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--line);
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, .25);
+    }
+
+
+    .student-photo-preview {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+
+    .photo-picker-title {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      opacity: .75;
+    }
+
+
+    .photo-picker-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+
+    .photo-btn {
+      flex: 1;
+      max-width: 150px;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #151515;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+
+    .photo-btn:active {
+      transform: scale(.97);
+    }
+
+
+    .remove-photo-btn {
+      margin-top: 12px;
+      border: none;
+      background: transparent;
+      color: #ff5b5b;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+
+    /* =====================================================
+       PHOTO INSIDE MEMBER AVATAR
+    ====================================================== */
+
+    .student-avatar img,
+    .profile-avatar img,
+    .reminder-avatar img,
+    .alert-avatar img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: inherit;
+    }
+
+
+    /* =====================================================
+       PHOTO RESPONSIVE
+    ====================================================== */
+
+    @media (max-width: 380px) {
+
+      .student-photo-picker {
+        padding: 15px;
+      }
+
+      .student-photo-preview-wrap {
+        width: 90px;
+        height: 90px;
+      }
+
+      .photo-btn {
+        font-size: 12px;
+      }
+
+    }
+
+
+    /* =====================================================
+       DEVELOPER CREDIT
+       STAR GYM — CREATED BY AZIM KHAN
+    ====================================================== */
+
+    .developer-credit {
+
+      width: 100%;
+      box-sizing: border-box;
+
+      margin: 28px 0 20px;
+
+      padding: 18px;
+
+      display: flex;
+      align-items: center;
+      gap: 14px;
+
+      background: linear-gradient(
+        145deg,
+        rgba(255,255,255,0.06),
+        rgba(255,255,255,0.02)
+      );
+
+      border: 1px solid rgba(255,255,255,0.10);
+
+      border-radius: 18px;
+
+      box-shadow:
+        0 10px 30px rgba(0,0,0,0.25);
+
+      text-align: left;
+    }
+
+
+    .developer-credit-logo {
+
+      width: 48px;
+      height: 48px;
+
+      min-width: 48px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 14px;
+
+      background: rgba(255,255,255,0.08);
+
+      font-size: 25px;
+
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+
+    .developer-credit-content {
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 3px;
+
+      min-width: 0;
+    }
+
+
+    .developer-credit-content strong {
+
+      font-size: 15px;
+
+      letter-spacing: 0.5px;
+    }
+
+
+    .developer-credit-content span {
+
+      font-size: 12px;
+
+      opacity: 0.65;
+    }
+
+
+    .developer-credit-content small {
+
+      font-size: 11px;
+
+      opacity: 0.55;
+    }
+
+
+    .developer-credit-content b {
+
+      opacity: 1;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+  <!-- =====================================================
+       HOME
+  ====================================================== -->
+
+  <section
+    class="screen active"
+    id="homeScreen"
+    data-screen="home"
+  >
+
+    <header class="top-header home-header">
+
+      <div class="brand">
+
+        <div class="brand-icon">
+          ★
+        </div>
+
+        <div>
+
+          <h1>
+            STAR GYM
+          </h1>
+
+          <span>
+            HARGON
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="icon-btn notification-btn"
+        onclick="navigateTo('reminders')"
+        aria-label="Notifications"
+      >
+
+        🔔
+
+        <span
+          id="notificationBadge"
+          class="notification-badge"
+        >
+          0
+        </span>
+
+      </button>
+
+    </header>
+
+
+    <div class="hero-card">
+
+      <div class="hero-content">
+
+        <span class="hero-small">
+          WELCOME BACK
+        </span>
+
+        <h2>
+          BUILD.
+          <span>GRIND.</span>
+          REPEAT.
+        </h2>
+
+        <p>
+          Manage your gym smarter.
+        </p>
+
+      </div>
+
+      <div class="hero-glow"></div>
+
+    </div>
+
+
+    <div class="section-heading">
+
+      <div>
+
+        <span class="eyebrow">
+          OVERVIEW
+        </span>
+
+        <h3>
+          Gym Statistics
+        </h3>
+
+      </div>
+
+    </div>
+
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+
+        <div class="stat-icon">
+          👥
+        </div>
+
+        <div>
+
+          <span>
+            Total Members
+          </span>
+
+          <strong id="totalMembers">
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="stat-card green">
+
+        <div class="stat-icon">
+          ✓
+        </div>
+
+        <div>
+
+          <span>
+            Active
+          </span>
+
+          <strong id="activeMembers">
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="stat-card orange">
+
+        <div class="stat-icon">
+          ⏳
+        </div>
+
+        <div>
+
+          <span>
+            Expiring
+          </span>
+
+          <strong id="expiringMembers">
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="stat-card red">
+
+        <div class="stat-icon">
+          !
+        </div>
+
+        <div>
+
+          <span>
+            Expired
+          </span>
+
+          <strong id="expiredMembers">
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         COLLECTION
+    ====================================================== -->
+
+    <div class="section-heading">
+
+      <div>
+
+        <span class="eyebrow">
+          MONEY
+        </span>
+
+        <h3>
+          Collection
+        </h3>
+
+      </div>
+
+      <button
+        class="text-btn"
+        onclick="navigateTo('fees')"
+      >
+        View All →
+      </button>
+
+    </div>
+
+
+    <div class="collection-card">
+
+      <div class="collection-main">
+
+        <span>
+          Today's Collection
+        </span>
+
+        <strong
+          class="collection-amount"
+        >
+          ₹<span id="homeTodayCollection">0</span>
+        </strong>
+
+      </div>
+
+
+      <div class="collection-divider"></div>
+
+
+      <div class="collection-secondary">
+
+        <span>
+          Total Collection
+        </span>
+
+        <strong
+          class="collection-amount"
+        >
+          ₹<span id="homeTotalCollection">0</span>
+        </strong>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         QUICK ACTIONS
+    ====================================================== -->
+
+    <div class="section-heading">
+
+      <div>
+
+        <span class="eyebrow">
+          SHORTCUTS
+        </span>
+
+        <h3>
+          Quick Actions
+        </h3>
+
+      </div>
+
+    </div>
+
+
+    <div class="quick-grid">
+
+      <button
+        class="quick-action primary"
+        onclick="navigateTo('addStudent')"
+      >
+
+        <span class="quick-icon">
+          ＋
+        </span>
+
+        <div>
+
+          <strong>
+            Add Member
+          </strong>
+
+          <small>
+            New membership
+          </small>
+
+        </div>
+
+      </button>
+
+
+      <button
+        class="quick-action"
+        onclick="navigateTo('students')"
+      >
+
+        <span class="quick-icon">
+          👥
+        </span>
+
+        <div>
+
+          <strong>
+            Members
+          </strong>
+
+          <small>
+            View all members
+          </small>
+
+        </div>
+
+      </button>
+
+
+      <button
+        class="quick-action"
+        onclick="navigateTo('payment')"
+      >
+
+        <span class="quick-icon">
+          ₹
+        </span>
+
+        <div>
+
+          <strong>
+            Add Payment
+          </strong>
+
+          <small>
+            Record fee
+          </small>
+
+        </div>
+
+      </button>
+
+
+      <button
+        class="quick-action"
+        onclick="navigateTo('reminders')"
+      >
+
+        <span class="quick-icon">
+          🔔
+        </span>
+
+        <div>
+
+          <strong>
+            Reminders
+          </strong>
+
+          <small>
+            Fee follow-ups
+          </small>
+
+        </div>
+
+      </button>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         RECENT ALERTS
+    ====================================================== -->
+
+    <div class="section-heading">
+
+      <div>
+
+        <span class="eyebrow">
+          ATTENTION
+        </span>
+
+        <h3>
+          Recent Alerts
+        </h3>
+
+      </div>
+
+      <button
+        class="text-btn"
+        onclick="navigateTo('reminders')"
+      >
+        See All →
+      </button>
+
+    </div>
+
+
+    <div
+      id="homeAlerts"
+      class="alert-list"
+    >
+
+      <div class="empty-state">
+
+        <div class="empty-icon">
+          ✓
+        </div>
+
+        <strong>
+          Everything looks good
+        </strong>
+
+        <span>
+          No membership alerts right now.
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       MEMBERS
+  ====================================================== -->
+
+  <section
+    class="screen"
+    id="studentsScreen"
+    data-screen="students"
+  >
+
+    <header class="page-header">
+
+      <div>
+
+        <span class="eyebrow">
+          STAR GYM
+        </span>
+
+        <h2>
+          Members
+        </h2>
+
+      </div>
+
+      <button
+        class="header-action"
+        onclick="navigateTo('addStudent')"
+      >
+        ＋
+      </button>
+
+    </header>
+
+
+    <div class="search-box">
+
+      <span>
+        ⌕
+      </span>
+
+      <input
+        type="search"
+        id="studentSearch"
+        placeholder="Search member..."
+        autocomplete="off"
+        oninput="searchStudents()"
+      >
+
+    </div>
+
+
+    <div class="filter-scroll">
+
+      <button
+        class="filter-btn active"
+        data-filter="all"
+        onclick="filterStudents('all', this)"
+      >
+        All
+      </button>
+
+      <button
+        class="filter-btn"
+        data-filter="active"
+        onclick="filterStudents('active', this)"
+      >
+        Active
+      </button>
+
+      <button
+        class="filter-btn"
+        data-filter="expiring"
+        onclick="filterStudents('expiring', this)"
+      >
+        Expiring
+      </button>
+
+      <button
+        class="filter-btn"
+        data-filter="expired"
+        onclick="filterStudents('expired', this)"
+      >
+        Expired
+      </button>
+
+    </div>
+
+
+    <div class="list-header">
+
+      <span id="memberCountText">
+        All Members
+      </span>
+
+      <span id="memberCount">
+        0
+      </span>
+
+    </div>
+
+
+    <div
+      id="studentList"
+      class="student-list"
+    ></div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       MEMBER PROFILE
+  ====================================================== -->
+
+  <section
+    class="screen detail-screen"
+    id="studentProfileScreen"
+    data-screen="studentProfile"
+  >
+
+    <header class="detail-header">
+
+      <button
+        class="back-btn"
+        onclick="goBack()"
+      >
+        ←
+      </button>
+
+      <div>
+
+        <span class="eyebrow">
+          MEMBER PROFILE
+        </span>
+
+        <h2 id="profileTitle">
+          Member
+        </h2>
+
+      </div>
+
+
+      <button
+        class="icon-btn"
+        id="profileMenuBtn"
+      >
+        ⋮
+      </button>
+
+    </header>
+
+
+    <div
+      id="studentProfileContent"
+      class="profile-content"
+    ></div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       ADD MEMBER
+  ====================================================== -->
+
+  <section
+    class="screen detail-screen"
+    id="addStudentScreen"
+    data-screen="addStudent"
+  >
+
+    <header class="detail-header">
+
+      <button
+        class="back-btn"
+        onclick="goBack()"
+      >
+        ←
+      </button>
+
+      <div>
+
+        <span class="eyebrow">
+          STAR GYM
+        </span>
+
+        <h2>
+          Add Member
+        </h2>
+
+      </div>
+
+      <div class="header-spacer"></div>
+
+    </header>
+
+
+    <div class="form-page">
+
+      <div class="form-intro">
+
+        <div class="large-form-icon">
+          👤
+        </div>
+
+        <div>
+
+          <h3>
+            New Membership
+          </h3>
+
+          <p>
+            Add member details and create their membership.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <form
+        id="addStudentForm"
+        onsubmit="event.preventDefault(); saveStudent();"
+      >
+
+
+        <!-- =====================================================
+             MEMBER PROFILE PHOTO
+        ====================================================== -->
+
+        <div class="input-group">
+
+          <label>
+            Profile Photo
+
+            <small>
+              Optional
+            </small>
+
+          </label>
+
+
+          <div class="student-photo-picker">
+
+            <span class="photo-picker-title">
+              Add member photo
+            </span>
+
+
+            <div
+              id="studentPhotoPreviewWrap"
+              class="student-photo-preview-wrap"
+            >
+
+              <span id="studentPhotoPlaceholder">
+                👤
+              </span>
+
+
+              <img
+                id="studentPhotoPreview"
+                class="student-photo-preview"
+                alt="Member Photo"
+                hidden
+              >
+
+            </div>
+
+
+            <div class="photo-picker-actions">
+
+              <button
+                type="button"
+                class="photo-btn"
+                onclick="openStudentCamera()"
+              >
+                📷 Camera
+              </button>
+
+
+              <button
+                type="button"
+                class="photo-btn"
+                onclick="openStudentGallery()"
+              >
+                🖼️ Gallery
+              </button>
+
+            </div>
+
+
+            <!-- REMOVE PHOTO -->
+
+            <button
+              type="button"
+              id="removeStudentPhotoBtn"
+              class="remove-photo-btn"
+              onclick="removeStudentPhoto()"
+              hidden
+            >
+              ✕ Remove Photo
+            </button>
+
+
+            <!-- =================================================
+                 CAMERA INPUT
+            ================================================== -->
+
+            <input
+              type="file"
+              id="studentCameraInput"
+              accept="image/*"
+              capture="environment"
+              hidden
+            >
+
+
+            <!-- =================================================
+                 GALLERY INPUT
+            ================================================== -->
+
+            <input
+              type="file"
+              id="studentGalleryInput"
+              accept="image/*"
+              hidden
+            >
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             MEMBER NAME
+        ====================================================== -->
+
+        <div class="input-group">
+
+          <label for="studentName">
+            Member Name
+          </label>
+
+          <input
+            type="text"
+            id="studentName"
+            placeholder="Enter full name"
+            required
+          >
+
+        </div>
+
+
+        <!-- =====================================================
+             MOBILE NUMBER
+        ====================================================== -->
+
+        <div class="input-group">
+
+          <label for="studentMobile">
+            Mobile Number
+          </label>
+
+          <input
+            type="tel"
+            id="studentMobile"
+            placeholder="10 digit mobile number"
+            inputmode="numeric"
+            maxlength="10"
+            required
+          >
+
+        </div>
+
+
+        <!-- =====================================================
+             FEE + DURATION
+        ====================================================== -->
+
+        <div class="form-row">
+
+          <div class="input-group">
+
+            <label for="studentFee">
+              Membership Fee
+            </label>
+
+            <div class="input-with-symbol">
+
+              <span>
+                ₹
+              </span>
+
+              <input
+                type="number"
+                id="studentFee"
+                placeholder="1500"
+                min="0"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="input-group">
+
+            <label for="studentDuration">
+              Duration
+            </label>
+
+            <select id="studentDuration">
+
+              <option value="1">
+                1 Month
+              </option>
+
+              <option value="2">
+                2 Months
+              </option>
+
+              <option value="3">
+                3 Months
+              </option>
+
+              <option value="6">
+                6 Months
+              </option>
+
+              <option value="12">
+                12 Months
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             JOINING DATE
+        ====================================================== -->
+
+        <div class="input-group">
+
+          <label for="joiningDate">
+            Joining Date
+          </label>
+
+          <input
+            type="date"
+            id="joiningDate"
+            required
+          >
+
+        </div>
+
+
+        <!-- =====================================================
+             NOTE
+        ====================================================== -->
+
+        <div class="form-note">
+
+          <span>
+            💡
+          </span>
+
+          <p>
+            Membership expiry will be calculated automatically according to the selected duration.
+          </p>
+
+        </div>
+
+
+        <!-- =====================================================
+             CREATE MEMBERSHIP
+        ====================================================== -->
+
+        <button
+          type="submit"
+          class="primary-large-btn"
+        >
+
+          <span>
+            ＋
+          </span>
+
+          Create Membership
+
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       FEES
+  ====================================================== -->
+
+  <section
+    class="screen"
+    id="feesScreen"
+    data-screen="fees"
+  >
+
+    <header class="page-header">
+
+      <div>
+
+        <span class="eyebrow">
+          FINANCE
+        </span>
+
+        <h2>
+          Fees & Payments
+        </h2>
+
+      </div>
+
+      <button
+        class="header-action"
+        onclick="navigateTo('payment')"
+      >
+        ＋
+      </button>
+
+    </header>
+
+
+    <div class="finance-card">
+
+      <span>
+        Total Collection
+      </span>
+
+      <strong class="collection-amount">
+        ₹<span id="feesTotalCollection">0</span>
+      </strong>
+
+
+      <div class="finance-bottom">
+
+        <span>
+
+          Today
+
+          <b class="collection-amount">
+            ₹<span id="feesTodayCollection">0</span>
+          </b>
+
+        </span>
+
+
+        <span>
+
+          Payments
+
+          <b id="feesPaymentCount">
+            0
+          </b>
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="section-heading compact">
+
+      <div>
+
+        <span class="eyebrow">
+          HISTORY
+        </span>
+
+        <h3>
+          Recent Payments
+        </h3>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="paymentList"
+      class="payment-list"
+    ></div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       ADD PAYMENT
+  ====================================================== -->
+
+  <section
+    class="screen detail-screen"
+    id="paymentScreen"
+    data-screen="payment"
+  >
+
+    <header class="detail-header">
+
+      <button
+        class="back-btn"
+        onclick="goBack()"
+      >
+        ←
+      </button>
+
+      <div>
+
+        <span class="eyebrow">
+          FINANCE
+        </span>
+
+        <h2>
+          Add Payment
+        </h2>
+
+      </div>
+
+      <div class="header-spacer"></div>
+
+    </header>
+
+
+    <div class="form-page">
+
+      <div class="form-intro">
+
+        <div class="large-form-icon">
+          ₹
+        </div>
+
+        <div>
+
+          <h3>
+            Record Payment
+          </h3>
+
+          <p>
+            Add a new membership fee payment.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <form
+        id="paymentForm"
+        onsubmit="event.preventDefault(); savePayment();"
+      >
+
+        <div class="input-group">
+
+          <label for="paymentStudent">
+            Select Member
+          </label>
+
+          <select
+            id="paymentStudent"
+            required
+          >
+
+            <option value="">
+              Select member
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label for="paymentAmount">
+            Amount
+          </label>
+
+          <div class="input-with-symbol">
+
+            <span>
+              ₹
+            </span>
+
+            <input
+              type="number"
+              id="paymentAmount"
+              placeholder="1500"
+              min="0"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label for="paymentDate">
+            Payment Date
+          </label>
+
+          <input
+            type="date"
+            id="paymentDate"
+            required
+          >
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label for="paymentNote">
+
+            Note
+
+            <small>
+              Optional
+            </small>
+
+          </label>
+
+          <input
+            type="text"
+            id="paymentNote"
+            placeholder="e.g. Monthly fee"
+          >
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="primary-large-btn"
+        >
+
+          <span>
+            ✓
+          </span>
+
+          Save Payment
+
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       RENEW MEMBERSHIP
+  ====================================================== -->
+
+  <section
+    class="screen detail-screen"
+    id="renewalScreen"
+    data-screen="renewal"
+  >
+
+    <header class="detail-header">
+
+      <button
+        class="back-btn"
+        onclick="goBack()"
+      >
+        ←
+      </button>
+
+      <div>
+
+        <span class="eyebrow">
+          MEMBERSHIP
+        </span>
+
+        <h2>
+          Renew Membership
+        </h2>
+
+      </div>
+
+      <div class="header-spacer"></div>
+
+    </header>
+
+
+    <div class="form-page">
+
+      <div class="form-intro">
+
+        <div class="large-form-icon">
+          🔄
+        </div>
+
+        <div>
+
+          <h3 id="renewalMemberName">
+            Member
+          </h3>
+
+          <p id="renewalMemberMobile">
+            Mobile
+          </p>
+
+          <p id="renewalMemberStatus">
+            Membership status
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="renewalPreview"
+        class="collection-card"
+        style="margin-bottom:20px;"
+      >
+
+        <div class="collection-main">
+
+          <span>
+            Current Expiry
+          </span>
+
+          <strong id="renewalOldExpiry">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="collection-divider"></div>
+
+
+        <div class="collection-secondary">
+
+          <span>
+            New Expiry
+          </span>
+
+          <strong id="renewalNewExpiry">
+            -
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <form
+        id="renewalForm"
+        onsubmit="event.preventDefault(); processRenewal();"
+      >
+
+        <div class="input-group">
+
+          <label for="renewalDuration">
+            Renewal Duration
+          </label>
+
+          <select
+            id="renewalDuration"
+            required
+          >
+
+            <option value="1">
+              1 Month
+            </option>
+
+            <option value="2">
+              2 Months
+            </option>
+
+            <option value="3">
+              3 Months
+            </option>
+
+            <option value="6">
+              6 Months
+            </option>
+
+            <option value="12">
+              12 Months
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label for="renewalFee">
+            Renewal Fee
+          </label>
+
+          <div class="input-with-symbol">
+
+            <span>
+              ₹
+            </span>
+
+            <input
+              type="number"
+              id="renewalFee"
+              placeholder="1500"
+              min="0"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label for="renewalStartDate">
+            Renewal Start Date
+          </label>
+
+          <input
+            type="date"
+            id="renewalStartDate"
+            readonly
+          >
+
+        </div>
+
+
+        <div class="form-note">
+
+          <span>
+            🔥
+          </span>
+
+          <p>
+            Active members will continue from their current expiry date. Expired members will start their renewed membership from today.
+          </p>
+
+        </div>
+
+
+        <div
+          class="settings-item"
+          style="
+            margin-bottom:18px;
+            border-radius:16px;
+            border:1px solid var(--line);
+          "
+        >
+
+          <div class="settings-item-left">
+
+            <div class="settings-icon">
+              ₹
+            </div>
+
+            <div>
+
+              <strong>
+                Add Renewal Payment
+              </strong>
+
+              <span>
+                Automatically add fee to collection
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <label class="switch">
+
+            <input
+              type="checkbox"
+              id="renewalAddPayment"
+              checked
+            >
+
+            <span class="slider"></span>
+
+          </label>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="primary-large-btn"
+        >
+
+          <span>
+            🔄
+          </span>
+
+          Renew Membership
+
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       REMINDERS
+  ====================================================== -->
+
+  <section
+    class="screen"
+    id="remindersScreen"
+    data-screen="reminders"
+  >
+
+    <header class="page-header">
+
+      <div>
+
+        <span class="eyebrow">
+          FOLLOW UP
+        </span>
+
+        <h2>
+          Reminders
+        </h2>
+
+      </div>
+
+      <div
+        class="reminder-counter"
+        id="reminderCount"
+      >
+        0
+      </div>
+
+    </header>
+
+
+    <div class="reminder-banner">
+
+      <div class="reminder-banner-icon">
+        🔔
+      </div>
+
+      <div>
+
+        <strong>
+          Membership Alerts
+        </strong>
+
+        <span>
+          Members whose plans need attention.
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="reminderList"
+      class="reminder-list"
+    ></div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       MORE / SETTINGS
+  ====================================================== -->
+
+  <section
+    class="screen"
+    id="settingsScreen"
+    data-screen="settings"
+  >
+
+    <header class="page-header">
+
+      <div>
+
+        <span class="eyebrow">
+          APP
+        </span>
+
+        <h2>
+          More
+        </h2>
+
+      </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         GYM PROFILE
+    ====================================================== -->
+
+    <div class="gym-profile-card">
+
+      <div class="gym-logo">
+        ★
+      </div>
+
+      <div>
+
+        <strong>
+          STAR GYM
+        </strong>
+
+        <span>
+          HARGON
+        </span>
+
+      </div>
+
+      <span class="premium-badge">
+        PREMIUM
+      </span>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         APP INSTALLATION
+    ====================================================== -->
+
+    <div class="settings-section">
+
+      <span class="settings-title">
+        APP INSTALLATION
+      </span>
+
+
+      <button
+        id="installAppBtn"
+        class="install-app-btn"
+        onclick="installApp()"
+        style="display:none;"
+      >
+
+        <span class="install-app-icon">
+          📲
+        </span>
+
+
+        <span class="install-app-content">
+
+          <strong>
+            Install STAR GYM App
+          </strong>
+
+          <small>
+            Install STAR GYM on your Android phone
+          </small>
+
+        </span>
+
+
+        <span class="install-app-arrow">
+          →
+        </span>
+
+      </button>
+
+
+      <div class="form-note">
+
+        <span>
+          💡
+        </span>
+
+        <p>
+          Install karne ke baad STAR GYM aapke phone me ek normal app ki tarah open hoga.
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         GYM SETTINGS
+    ====================================================== -->
+
+    <div class="settings-section">
+
+      <span class="settings-title">
+        GYM SETTINGS
+      </span>
+
+
+      <div class="settings-item">
+
+        <div class="settings-item-left">
+
+          <div class="settings-icon">
+            🔔
+          </div>
+
+          <div>
+
+            <strong>
+              Fee Alerts
+            </strong>
+
+            <span>
+              Membership expiry reminders
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <label class="switch">
+
+          <input
+            type="checkbox"
+            id="alertToggle"
+            checked
+          >
+
+          <span class="slider"></span>
+
+        </label>
+
+      </div>
+
+
+      <div class="settings-item">
+
+        <div class="settings-item-left">
+
+          <div class="settings-icon">
+            💾
+          </div>
+
+          <div>
+
+            <strong>
+              Local Storage
+            </strong>
+
+            <span>
+              Your data is stored on this device
+            </span>
+
+          </div>
+
+        </div>
+
+        <span class="status-dot"></span>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         BACKUP
+    ====================================================== -->
+
+    <div class="settings-section">
+
+      <span class="settings-title">
+        DATA MANAGEMENT
+      </span>
+
+
+      <button
+        class="danger-btn"
+        style="
+          color:#fff;
+          background:var(--card);
+          border-color:var(--line);
+          margin-bottom:10px;
+        "
+        onclick="exportBackup()"
+      >
+
+        <span>
+          💾
+        </span>
+
+        <div>
+
+          <strong>
+            Backup Data
+          </strong>
+
+          <small>
+            Save all members and payments as a backup file
+          </small>
+
+        </div>
+
+      </button>
+
+
+      <label
+        class="danger-btn"
+        style="
+          color:#fff;
+          background:var(--card);
+          border-color:var(--line);
+          cursor:pointer;
+        "
+      >
+
+        <span>
+          📥
+        </span>
+
+        <div>
+
+          <strong>
+            Restore Backup
+          </strong>
+
+          <small>
+            Restore members and payment history
+          </small>
+
+        </div>
+
+
+        <input
+          type="file"
+          accept=".json,application/json"
+          style="display:none;"
+          onchange="importBackupFile(this.files[0])"
+        >
+
+      </label>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         DANGER ZONE
+    ====================================================== -->
+
+    <div class="settings-section danger-section">
+
+      <span class="settings-title">
+        DANGER ZONE
+      </span>
+
+
+      <button
+        class="danger-btn"
+        onclick="clearAllData()"
+      >
+
+        <span>
+          🗑
+        </span>
+
+        <div>
+
+          <strong>
+            Delete All Data
+          </strong>
+
+          <small>
+            Permanently remove all members and payments
+          </small>
+
+        </div>
+
+      </button>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         DEVELOPER CREDIT
+    ====================================================== -->
+
+    <div class="developer-credit">
+
+      <div class="developer-credit-logo">
+        ⭐
+      </div>
+
+      <div class="developer-credit-content">
+
+        <strong>
+          STAR GYM
+        </strong>
+
+        <span>
+          Premium Gym Management App
+        </span>
+
+        <small>
+          Created by <b>Azim Khan</b> ❤️
+        </small>
+
+        <small>
+          Version 4.2 • PWA
+        </small>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       BOTTOM NAVIGATION
+  ====================================================== -->
+
+  <nav
+    class="bottom-nav"
+    id="bottomNav"
+  >
+
+    <button
+      class="nav-item active"
+      data-nav="home"
+      onclick="navigateTo('home')"
+    >
+
+      <span class="nav-icon">
+        ⌂
+      </span>
+
+      <span>
+        Home
+      </span>
+
+    </button>
+
+
+    <button
+      class="nav-item"
+      data-nav="students"
+      onclick="navigateTo('students')"
+    >
+
+      <span class="nav-icon">
+        ♟
+      </span>
+
+      <span>
+        Members
+      </span>
+
+    </button>
+
+
+    <button
+      class="nav-add"
+      onclick="navigateTo('addStudent')"
+      aria-label="Add Member"
+    >
+
+      <span>
+        ＋
+      </span>
+
+    </button>
+
+
+    <button
+      class="nav-item"
+      data-nav="fees"
+      onclick="navigateTo('fees')"
+    >
+
+      <span class="nav-icon">
+        ₹
+      </span>
+
+      <span>
+        Fees
+      </span>
+
+    </button>
+
+
+    <button
+      class="nav-item"
+      data-nav="settings"
+      onclick="navigateTo('settings')"
+    >
+
+      <span class="nav-icon">
+        ☰
+      </span>
+
+      <span>
+        More
+      </span>
+
+    </button>
+
+  </nav>
+
+
+
+  <!-- =====================================================
+       TOAST
+  ====================================================== -->
+
+  <div
+    id="toast"
+    class="toast"
+  >
+
+    <span id="toastIcon">
+      ✓
+    </span>
+
+    <span id="toastMessage">
+      Done
+    </span>
+
+  </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     MAIN JAVASCRIPT
+====================================================== -->
+
+<script src="./script.js"></script>
+
+
+</body>
+</html>

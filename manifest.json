@@ -1,0 +1,28 @@
+{
+  "id": "./",
+  "name": "STAR GYM - Gym Management",
+  "short_name": "STAR GYM",
+  "description": "Premium Gym Management App for STAR GYM HARGON",
+
+  "start_url": "./index.html",
+  "scope": "./",
+
+  "display": "standalone",
+  "orientation": "portrait",
+
+  "background_color": "#050505",
+  "theme_color": "#050505",
+
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
